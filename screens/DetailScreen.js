@@ -1,23 +1,40 @@
 import React from "react";
-import { View, Text, ImageBackground, StyleSheet } from "react-native";
-import { Button } from "react-native-elements";
-import backgroundImage from "../assets/background.png";
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Animated,
+  TouchableOpacity,
+} from "react-native";
+import { Button, Card } from "react-native-elements";
+import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
+import backgroundImage from "../assets/detail-background.png";
 
 const DetailScreen = ({ navigation }) => {
   return (
     <ImageBackground source={backgroundImage} style={styles.background}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Ini tampilan Detail</Text>
-        <Button
-          title="Go Back"
-          onPress={() => navigation.goBack()}
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-        />
-      </View>
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2024 | Maulana Rizky</Text>
-      </View>
+      <LinearGradient
+        colors={["rgba(0,0,0,0.5)", "rgba(0,0,0,0.8)"]}
+        style={styles.overlay}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>Detail Screen</Text>
+          <Card containerStyle={styles.card}>
+            <Text style={styles.cardText}>
+              This is the detail of the selected item.
+            </Text>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Button
+                icon={<Ionicons name="arrow-back" size={15} color="white" />}
+                title="Back"
+                buttonStyle={styles.button}
+              />
+            </TouchableOpacity>
+          </Card>
+        </View>
+      </LinearGradient>
     </ImageBackground>
   );
 };
@@ -28,26 +45,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  overlay: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
-    borderRadius: 10,
+    padding: 20,
     alignItems: "center",
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
+    color: "#fff",
+  },
+  card: {
+    borderRadius: 10,
+    padding: 15,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+  },
+  cardText: {
+    fontSize: 16,
     color: "#333",
+    marginBottom: 15,
   },
   button: {
-    backgroundColor: "#dc3545",
+    backgroundColor: "#007bff",
     borderRadius: 5,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  buttonTitle: {
-    color: "#fff",
-    fontWeight: "bold",
   },
 });
 
